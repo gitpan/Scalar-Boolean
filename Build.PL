@@ -20,7 +20,7 @@ my %module_build_args = (
     'Alan Haggai Alavi <alanhaggai@alanhaggai.org>'
   ],
   'dist_name' => 'Scalar-Boolean',
-  'dist_version' => '0.01',
+  'dist_version' => '0.02',
   'license' => 'perl',
   'module_name' => 'Scalar::Boolean',
   'recommends' => {},

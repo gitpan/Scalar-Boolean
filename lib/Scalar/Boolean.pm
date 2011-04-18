@@ -49,7 +49,7 @@ Scalar::Boolean - Makes scalar variables store Boolean values only
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -65,7 +65,6 @@ version 0.01
 
     unbooleanise $value;  # same as `unbooleanize`
     $value = 'foo';  # $value gets set to 'foo'
-    …
 
 =head1 METHODS
 
@@ -79,8 +78,6 @@ corresponding Boolean values. No effect on already C<booleanise>d variables.
 
 Accepts scalar variables which will be C<unbooleanise>d if already
 C<booleanise>d. No effect on not already C<booleanise>d variables.
-
-=encoding utf-8
 
 =head1 AUTHOR
 
