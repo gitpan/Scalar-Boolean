@@ -12,7 +12,7 @@ my %module_build_args = (
     'Test::More' => '0'
   },
   'configure_requires' => {
-    'ExtUtils::MakeMaker' => '6.31',
+    'ExtUtils::MakeMaker' => '6.30',
     'Module::Build' => '0.3601'
   },
   'dist_abstract' => 'Makes scalar variables store Boolean values only',
@@ -20,7 +20,7 @@ my %module_build_args = (
     'Alan Haggai Alavi <alanhaggai@alanhaggai.org>'
   ],
   'dist_name' => 'Scalar-Boolean',
-  'dist_version' => '0.02',
+  'dist_version' => '1.00',
   'license' => 'perl',
   'module_name' => 'Scalar::Boolean',
   'recommends' => {},

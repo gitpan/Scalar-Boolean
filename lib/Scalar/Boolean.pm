@@ -1,41 +1,39 @@
 use strict;
 use warnings;
 
-BEGIN {
-    *Scalar::Boolean::booleanize   = \&Scalar::Boolean::booleanise;
-    *Scalar::Boolean::unbooleanize = \&Scalar::Boolean::unbooleanise;
-}
-
+# ABSTRACT: Makes scalar variables store Boolean values only
 package Scalar::Boolean;
 
-# ABSTRACT: Makes scalar variables store Boolean values only
+use base qw( Exporter );
+our @EXPORT = qw(
+  boolean
+  bool   booleanise   booleanize
+  unbool unbooleanise unbooleanize
+);
 
-use Tie::Scalar;
+my $use_variable_magic = 1;
 
-use base qw( Exporter Tie::StdScalar );
-our @EXPORT = qw( booleanise booleanize unbooleanise unbooleanize );
-
-sub STORE {
-    my ( $ref, $value ) = @_;
-    $$ref = $value ? 1 : 0;
-    return;
+eval { require Variable::Magic };
+if ($@) {
+    $use_variable_magic = 0;
 }
 
-sub TIESCALAR {
-    my ( $class, $value ) = @_;
-    $value = $value ? 1 : 0;
-    return bless \$value, $class;
+if ($use_variable_magic) {
+    require Scalar::Boolean::VM;
+
+    *booleanise   = *Scalar::Boolean::VM::booleanise;
+    *unbooleanise = *Scalar::Boolean::VM::unbooleanise;
+}
+else {
+    require Scalar::Boolean::Tie;
+
+    *booleanise   = *Scalar::Boolean::Tie::booleanise;
+    *unbooleanise = *Scalar::Boolean::Tie::unbooleanise;
 }
 
-sub booleanise(\$;\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$) {
-    tie $$_, __PACKAGE__, $$_ for @_;
-    return;
-}
-
-sub unbooleanise(\$;\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$\$) {
-    untie $$_ for @_;
-    return;
-}
+*bool   = *booleanize   = *booleanise;
+*unbool = *unbooleanize = *unbooleanise;
+*boolean = *Scalar::Boolean::Value::boolean;
 
 1;
 
@@ -49,13 +47,13 @@ Scalar::Boolean - Makes scalar variables store Boolean values only
 
 =head1 VERSION
 
-version 0.02
+version 1.00
 
 =head1 SYNOPSIS
 
     use Scalar::Boolean;
 
-    booleanize my $value;  # you can even use `booleanise`
+    bool my $value;
     $value = [];       # $value gets set to 1
     $value = 'Perl';   # $value gets set to 1
     $value = '';       # $value gets set to 0
@@ -63,21 +61,39 @@ version 0.02
     $value = undef;    # $value gets set to 0
     $value = ();       # $value gets set to 0
 
-    unbooleanise $value;  # same as `unbooleanize`
+    unbool $value;
     $value = 'foo';  # $value gets set to 'foo'
+
+    boolean [];     # returns 1
+    boolean undef;  # returns 0
 
 =head1 METHODS
 
-=head2 C<booleanise> or C<booleanize>
+=head2 C<bool> or C<booleanise> or C<booleanize>
 
 Accepts scalar variables which will be C<booleanise>d. Once C<booleanise>d,
 the variable will convert all values that are assigned to it to their
 corresponding Boolean values. No effect on already C<booleanise>d variables.
 
-=head2 C<unbooleanise> or C<unbooleanize>
+=head2 C<unbool> or C<unbooleanise> or C<unbooleanize>
 
 Accepts scalar variables which will be C<unbooleanise>d if already
 C<booleanise>d. No effect on not already C<booleanise>d variables.
+
+=head2 C<boolean>
+
+Accepts a single value and returns its boolean value without affecting its
+original value.
+
+=head1 PERFORMANCE
+
+For performance reasons, Scalar::Boolean prefers L<Variable::Magic> if it is
+installed, else uses L<Tie::Scalar> for magic.
+
+=head1 ACKNOWLEDGEMENT
+
+Many thanks to B<Eric Brine> (B<ikegami>) for suggesting several improvements, for
+valuable suggestions and also for sending sample code. Thank you Eric! :-)
 
 =head1 AUTHOR
 
