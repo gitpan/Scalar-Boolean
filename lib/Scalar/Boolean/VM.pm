@@ -1,7 +1,8 @@
 use strict;
 use warnings;
 
-package Scalar::Boolean::VM;
+package    #private
+  Scalar::Boolean::VM;
 
 use Variable::Magic qw( wizard cast dispell );
 
@@ -38,7 +39,7 @@ Scalar::Boolean::VM
 
 =head1 VERSION
 
-version 1.00
+version 1.02
 
 =head1 AUTHOR
 
@@ -46,7 +47,7 @@ Alan Haggai Alavi <alanhaggai@alanhaggai.org>
 
 =head1 COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2011 by Alan Haggai Alavi.
+This software is copyright (c) 2012 by Alan Haggai Alavi.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

@@ -9,25 +9,25 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  'ABSTRACT' => 'Makes scalar variables store Boolean values only',
-  'AUTHOR' => 'Alan Haggai Alavi <alanhaggai@alanhaggai.org>',
-  'BUILD_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.31',
-    'Module::Build' => '0.3601',
-    'Test::More' => '0'
+  "ABSTRACT" => "Makes scalar variables store Boolean values only",
+  "AUTHOR" => "Alan Haggai Alavi <alanhaggai\@alanhaggai.org>",
+  "BUILD_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.31",
+    "Module::Build" => "0.3601",
+    "Test::More" => 0
   },
-  'CONFIGURE_REQUIRES' => {
-    'ExtUtils::MakeMaker' => '6.30',
-    'Module::Build' => '0.3601'
+  "CONFIGURE_REQUIRES" => {
+    "ExtUtils::MakeMaker" => "6.30",
+    "Module::Build" => "0.3601"
   },
-  'DISTNAME' => 'Scalar-Boolean',
-  'EXE_FILES' => [],
-  'LICENSE' => 'perl',
-  'NAME' => 'Scalar::Boolean',
-  'PREREQ_PM' => {},
-  'VERSION' => '1.00',
-  'test' => {
-    'TESTS' => 't/*.t'
+  "DISTNAME" => "Scalar-Boolean",
+  "EXE_FILES" => [],
+  "LICENSE" => "perl",
+  "NAME" => "Scalar::Boolean",
+  "PREREQ_PM" => {},
+  "VERSION" => "1.02",
+  "test" => {
+    "TESTS" => "t/*.t"
   }
 );
 
